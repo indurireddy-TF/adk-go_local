@@ -279,12 +279,16 @@ type AfterModelCallback func(ctx agent.CallbackContext, llmResponse *model.LLMRe
 // is replaced with the returned response/error.
 type OnModelErrorCallback func(ctx agent.CallbackContext, llmRequest *model.LLMRequest, llmResponseError error) (*model.LLMResponse, error)
 
-// BeforeToolCallback is a function type executed before a tool's Run method is invoked.
+// BeforeToolCallback is executed before a tool's Run method.
 //
-// Parameters:
-//   - ctx: The tool.Context for the current tool execution.
-//   - tool: The tool.Tool instance that is about to be executed.
-//   - args: The original arguments provided to the tool.
+// Callbacks are executed in the order they are provided.
+// If a callback returns a non-nil result or an error:
+// - execution of remaining callbacks stops
+// - the actual tool call is skipped
+// - the returned result is used as the tool result
+//
+// To modify tool arguments and still run the tool,
+// update args in place and return (nil, nil).
 type BeforeToolCallback func(ctx tool.Context, tool tool.Tool, args map[string]any) (map[string]any, error)
 
 // AfterToolCallback is a function type executed after a tool's Run method has completed,
