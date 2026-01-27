@@ -80,9 +80,17 @@ func appendInstructions(ctx agent.InvocationContext, req *model.LLMRequest, agen
 		return nil
 	}
 
-	inst, err := InjectSessionState(ctx, agentState.Instruction)
-	if err != nil {
-		return fmt.Errorf("failed to inject session state into instruction: %w", err)
+	var inst string
+	var err error
+
+	// Check the new flag on agentState before attempting to inject state
+	if agentState.DisableInstructionTemplating {
+		inst = agentState.Instruction
+	} else {
+		inst, err = InjectSessionState(ctx, agentState.Instruction)
+		if err != nil {
+			return fmt.Errorf("failed to inject session state into instruction: %w", err)
+		}
 	}
 
 	utils.AppendInstructions(req, inst)

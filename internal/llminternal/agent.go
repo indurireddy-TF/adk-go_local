@@ -49,6 +49,8 @@ type State struct {
 	OutputSchema *genai.Schema
 
 	OutputKey string
+
+	DisableInstructionTemplating bool
 }
 
 type InstructionProvider func(ctx agent.ReadonlyContext) (string, error)

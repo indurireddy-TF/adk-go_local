@@ -90,6 +90,7 @@ func New(cfg Config) (agent.Agent, error) {
 			GlobalInstruction:         cfg.GlobalInstruction,
 			GlobalInstructionProvider: llminternal.InstructionProvider(cfg.GlobalInstructionProvider),
 			OutputKey:                 cfg.OutputKey,
+			DisableInstructionTemplating: cfg.DisableInstructionTemplating,
 		},
 	}
 
@@ -259,6 +260,13 @@ type Config struct {
 	// - Extracts agent reply for later use, such as in tools, callbacks, etc.
 	// - Connects agents to coordinate with each other.
 	OutputKey string
+
+	// DisableInstructionTemplating disables session state placeholder injection
+	// into the instruction.
+	//
+	// When this is set to true, ADK will NOT attempt to resolve placeholders
+	// like {key_name} or {artifact.key_name} in the instruction.
+	DisableInstructionTemplating bool
 }
 
 // BeforeModelCallback that is called before sending a request to the model.
