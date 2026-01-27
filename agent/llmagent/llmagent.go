@@ -84,12 +84,12 @@ func New(cfg Config) (agent.Agent, error) {
 			InputSchema:              cfg.InputSchema,
 			OutputSchema:             cfg.OutputSchema,
 			// TODO: internal type for includeContents
-			IncludeContents:           string(cfg.IncludeContents),
-			Instruction:               cfg.Instruction,
-			InstructionProvider:       llminternal.InstructionProvider(cfg.InstructionProvider),
-			GlobalInstruction:         cfg.GlobalInstruction,
-			GlobalInstructionProvider: llminternal.InstructionProvider(cfg.GlobalInstructionProvider),
-			OutputKey:                 cfg.OutputKey,
+			IncludeContents:              string(cfg.IncludeContents),
+			Instruction:                  cfg.Instruction,
+			InstructionProvider:          llminternal.InstructionProvider(cfg.InstructionProvider),
+			GlobalInstruction:            cfg.GlobalInstruction,
+			GlobalInstructionProvider:    llminternal.InstructionProvider(cfg.GlobalInstructionProvider),
+			OutputKey:                    cfg.OutputKey,
 			DisableInstructionTemplating: cfg.DisableInstructionTemplating,
 		},
 	}
