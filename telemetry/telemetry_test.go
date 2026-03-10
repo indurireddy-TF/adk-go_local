@@ -237,7 +237,6 @@ func extractResourceAttributes(res *resource.Resource) (string, string, string) 
 			serviceVersion = attr.Value.AsString()
 		}
 	}
-
 	return projectID, serviceName, serviceVersion
 }
 
