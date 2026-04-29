@@ -1,10 +1,10 @@
-//    Copyright 2026 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//	http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -399,10 +399,13 @@ func replayHistoryToFindState(history []TimelineEvent, maintainers []string, iss
 	}
 }
 
-// Helper to check if actor is in maintainers list
-func isMaintainer(actor string, maintainers map[string]bool) bool {
-	_, ok := maintainers[actor]
-	return ok
+func isMaintainer(actor string, maintainers []string) bool {
+	for _, m := range maintainers {
+		if actor == m {
+			return true
+		}
+	}
+	return false
 }
 
 func formatDays(hours float64) string {
